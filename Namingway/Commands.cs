@@ -10,7 +10,7 @@ internal class Commands : IDisposable {
             this.Plugin = plugin;
 
             Service.CommandManager.AddHandler("/namingway", new CommandInfo(this.OnCommand) {
-                HelpMessage = "Opens the Namingway interface",
+                HelpMessage = "開啟 Namingway 介面",
             });
         }
 

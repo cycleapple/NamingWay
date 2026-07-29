@@ -57,16 +57,16 @@ internal class PluginUi : IDisposable {
         }
 
         if (ImGui.BeginMenuBar()) {
-            if (ImGui.BeginMenu("Pack")) {
+            if (ImGui.BeginMenu("套組")) {
                 ImGui.PushID("pack-menu");
 
-                if (ImGui.MenuItem("New")) {
-                    this.Plugin.Config.CustomPacks.Add(new Pack("Untitled Pack") {
+                if (ImGui.MenuItem("新增")) {
+                    this.Plugin.Config.CustomPacks.Add(new Pack("未命名套組") {
                         Id = Guid.NewGuid(),
                     });
                 }
 
-                if (ImGui.BeginMenu("Import")) {
+                if (ImGui.BeginMenu("匯入")) {
                     ImGui.SetNextItemWidth(250);
                     if (ImGui.InputText("##import-json", ref this._importJson, 5120)) {
                         try {
@@ -77,14 +77,14 @@ internal class PluginUi : IDisposable {
                     }
 
                     if (this._importPack != null) {
-                        ImGui.TextUnformatted($"Name: {this._importPack.Name}");
-                        ImGui.TextUnformatted($"Actions: {this._importPack.Actions.Count}");
-                        ImGui.TextUnformatted($"Status effects: {this._importPack.Statuses.Count}");
+                        ImGui.TextUnformatted($"名稱：{this._importPack.Name}");
+                        ImGui.TextUnformatted($"技能：{this._importPack.Actions.Count}");
+                        ImGui.TextUnformatted($"狀態效果：{this._importPack.Statuses.Count}");
 
                         var existing = this.Plugin.Config.FindEnabledPack(this._importPack.Id);
                         if (existing != null) {
-                            ImGui.TextUnformatted($"A pack with this ID already exists: {existing.Name}.");
-                        } else if (ImGui.Button("Import##import-button")) {
+                            ImGui.TextUnformatted($"已有相同 ID 的套組：{existing.Name}。");
+                        } else if (ImGui.Button("匯入##import-button")) {
                             this.Plugin.Config.CustomPacks.Add(this._importPack);
                             this._importPack = null;
                             this._importJson = string.Empty;
@@ -95,7 +95,7 @@ internal class PluginUi : IDisposable {
                     ImGui.EndMenu();
                 }
 
-                if (ImGui.BeginMenu("Export")) {
+                if (ImGui.BeginMenu("匯出")) {
                     foreach (var pack in this.Plugin.Config.CustomPacks) {
                         if (ImGui.MenuItem($"{pack.Name}##{pack.Id}")) {
                             ExportPack(pack);
@@ -109,12 +109,12 @@ internal class PluginUi : IDisposable {
                 ImGui.EndMenu();
             }
 
-            if (ImGui.BeginMenu("Options")) {
+            if (ImGui.BeginMenu("選項")) {
                 ImGui.PushID("options-menu");
 
                 var anyChanged = false;
 
-                if (ImGui.MenuItem("Only show player actions", string.Empty, ref this.Plugin.Config.OnlyPlayerActions)) {
+                if (ImGui.MenuItem("僅顯示玩家技能", string.Empty, ref this.Plugin.Config.OnlyPlayerActions)) {
                     this.FilterActions();
                     anyChanged = true;
                 }
@@ -157,12 +157,12 @@ internal class PluginUi : IDisposable {
                 }
             }
 
-            if (ImGui.TreeNode("Default")) {
+            if (ImGui.TreeNode("預設")) {
                 DrawPacks(DefaultPacks.All);
                 ImGui.TreePop();
             }
 
-            if (ImGui.TreeNode("Custom")) {
+            if (ImGui.TreeNode("自訂")) {
                 DrawPacks(this.Plugin.Config.CustomPacks);
                 ImGui.TreePop();
             }
@@ -206,17 +206,17 @@ internal class PluginUi : IDisposable {
         if (custom) {
             ImGui.SameLine();
 
-            ImGui.Checkbox("Edit mode", ref this._editing);
+            ImGui.Checkbox("編輯模式", ref this._editing);
         }
 
         ImGui.Separator();
 
-        ImGui.TextUnformatted("Actions");
+        ImGui.TextUnformatted("技能");
 
         if (ImGui.BeginTable("actions", 3, ImGuiTableFlags.BordersInnerH)) {
             ImGui.TableSetupColumn("##icon", ImGuiTableColumnFlags.WidthFixed);
-            ImGui.TableSetupColumn("Old name");
-            ImGui.TableSetupColumn("New name");
+            ImGui.TableSetupColumn("原名稱");
+            ImGui.TableSetupColumn("新名稱");
 
             ImGui.TableHeadersRow();
 
@@ -241,12 +241,12 @@ internal class PluginUi : IDisposable {
 
         ImGui.Separator();
 
-        ImGui.TextUnformatted("Status effects");
+        ImGui.TextUnformatted("狀態效果");
 
         if (ImGui.BeginTable("statuses", 3, ImGuiTableFlags.BordersInnerH)) {
             ImGui.TableSetupColumn("##icon", ImGuiTableColumnFlags.WidthFixed);
-            ImGui.TableSetupColumn("Old name");
-            ImGui.TableSetupColumn("New name");
+            ImGui.TableSetupColumn("原名稱");
+            ImGui.TableSetupColumn("新名稱");
 
             ImGui.TableHeadersRow();
 
@@ -289,7 +289,7 @@ internal class PluginUi : IDisposable {
         if (custom) {
             ImGui.SameLine();
 
-            if (ImGui.Checkbox("Edit mode", ref this._editing)) {
+            if (ImGui.Checkbox("編輯模式", ref this._editing)) {
                 this.Plugin.Config.SaveConfig();
             }
 
@@ -307,12 +307,12 @@ internal class PluginUi : IDisposable {
 
         ImGui.Separator();
 
-        ImGui.TextUnformatted("Actions");
+        ImGui.TextUnformatted("技能");
 
         if (ImGui.BeginTable("actions", 4, ImGuiTableFlags.BordersInnerH)) {
             ImGui.TableSetupColumn("##icon", ImGuiTableColumnFlags.WidthFixed);
-            ImGui.TableSetupColumn("Old name");
-            ImGui.TableSetupColumn("New name");
+            ImGui.TableSetupColumn("原名稱");
+            ImGui.TableSetupColumn("新名稱");
             ImGui.TableSetupColumn("##button", ImGuiTableColumnFlags.WidthFixed);
 
             ImGui.TableHeadersRow();
@@ -354,7 +354,7 @@ internal class PluginUi : IDisposable {
             ImGui.SetNextItemWidth(-1);
             if (ImGui.BeginCombo("##edit-action", editAction.Name.ToString() ?? string.Empty)) {
                 ImGui.SetNextItemWidth(-1);
-                if (ImGui.InputTextWithHint("##edit-action-search", "Search...", ref this._editActionSearch, 100)) {
+                if (ImGui.InputTextWithHint("##edit-action-search", "搜尋…", ref this._editActionSearch, 100)) {
                     this.FilterActions();
                     this._editActionId = 0;
                 }
@@ -416,12 +416,12 @@ internal class PluginUi : IDisposable {
 
         ImGui.Separator();
 
-        ImGui.TextUnformatted("Status effects");
+        ImGui.TextUnformatted("狀態效果");
 
         if (ImGui.BeginTable("statuses", 4, ImGuiTableFlags.BordersInnerH)) {
             ImGui.TableSetupColumn("##icon", ImGuiTableColumnFlags.WidthFixed);
-            ImGui.TableSetupColumn("Old name");
-            ImGui.TableSetupColumn("New name");
+            ImGui.TableSetupColumn("原名稱");
+            ImGui.TableSetupColumn("新名稱");
             ImGui.TableSetupColumn("##button", ImGuiTableColumnFlags.WidthFixed);
 
             ImGui.TableHeadersRow();
@@ -463,7 +463,7 @@ internal class PluginUi : IDisposable {
             ImGui.SetNextItemWidth(-1);
             if (ImGui.BeginCombo("##edit-status", editStatus.Name.ToString() ?? string.Empty)) {
                 ImGui.SetNextItemWidth(-1);
-                if (ImGui.InputTextWithHint("##edit-status-search", "Search...", ref this._editStatusSearch, 100)) {
+                if (ImGui.InputTextWithHint("##edit-status-search", "搜尋…", ref this._editStatusSearch, 100)) {
                     this._editStatusId = 0;
                     this.FilterStatuses();
                 }

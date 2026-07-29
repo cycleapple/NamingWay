@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Namingway;
 
 internal static class DefaultPacks {
-    private static readonly Pack SpellSuffixWhm = new("Spell Suffixes (WHM)") {
+    private static readonly Pack SpellSuffixWhm = new("魔法後綴（WHM）") {
         Id = new Guid("9C46FB72-824E-476C-8649-8ECAEFD6C280"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.StoneII] = "Stonera",
@@ -26,7 +26,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixBlm = new("Spell Suffixes (BLM)") {
+    private static readonly Pack SpellSuffixBlm = new("魔法後綴（BLM）") {
         Id = new Guid("3E12EE15-F7DC-448A-90BF-4734EA9CCA17"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.FireII] = "Fira",
@@ -49,7 +49,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixAst = new("Spell Suffixes (AST)") {
+    private static readonly Pack SpellSuffixAst = new("魔法後綴（AST）") {
         Id = new Guid("F8EE5346-5254-4B99-8392-65FBC6DAD952"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.BeneficII] = "Benefira",
@@ -67,7 +67,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixSch = new("Spell Suffixes (SCH)") {
+    private static readonly Pack SpellSuffixSch = new("魔法後綴（SCH）") {
         Id = new Guid("D5FEF979-493B-41A8-A4BC-3FE234C490F3"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.SchBioII] = "Biora",
@@ -81,7 +81,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixSch2 = new("Spell Suffixes (SCH 2)") {
+    private static readonly Pack SpellSuffixSch2 = new("魔法後綴（SCH 2）") {
         Id = new Guid("0E92ACD6-4EAF-4857-9EDE-F76F35F1D415"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.ArtOfWar] = "Scourge",
@@ -89,7 +89,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixSge = new("Spell Suffixes (SGE)") {
+    private static readonly Pack SpellSuffixSge = new("魔法後綴（SGE）") {
         Id = new Guid("4DE99035-4469-4589-84F7-717815F6DDCA"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.DosisII] = "Dosira",
@@ -110,7 +110,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixSmn = new("Spell Suffixes (SMN)") {
+    private static readonly Pack SpellSuffixSmn = new("魔法後綴（SMN）") {
         Id = new Guid("C10324AE-0A08-4AD6-95B7-389570C34B12"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.SmnRuinII] = "Ruinra",
@@ -125,7 +125,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixRdm = new("Spell Suffixes (RDM)") {
+    private static readonly Pack SpellSuffixRdm = new("魔法後綴（RDM）") {
         Id = new Guid("ECEC3695-52E7-4691-A996-ACA3BC9B88B9"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.JoltII] = "Joltra",
@@ -137,7 +137,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixPct = new("Spell Suffixes (PCT)") {
+    private static readonly Pack SpellSuffixPct = new("魔法後綴（PCT）") {
         Id = new Guid("CDA25E5D-8823-436B-96C6-5EEA83040268"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.Fire2InRed] = "Fira in Red",
@@ -149,7 +149,7 @@ internal static class DefaultPacks {
         },
     };
 
-    private static readonly Pack SpellSuffixBozja = new("Spell Suffixes (Bozja)") {
+    private static readonly Pack SpellSuffixBozja = new("魔法後綴（博茲雅）") {
         Id = new Guid("DE1523BB-47B6-4415-8B62-7804C3595847"),
         Actions = new Dictionary<uint, string> {
             [(uint) Action.LostCureII] = "Lost Cura",
