@@ -5,7 +5,7 @@ using System.Numerics;
 using Dalamud.Interface;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using Lumina.Excel.Sheets;
 using Newtonsoft.Json;
 
@@ -114,7 +114,7 @@ internal class PluginUi : IDisposable {
 
                 var anyChanged = false;
 
-                if (ImGui.MenuItem("Only show player actions", null, ref this.Plugin.Config.OnlyPlayerActions)) {
+                if (ImGui.MenuItem("Only show player actions", string.Empty, ref this.Plugin.Config.OnlyPlayerActions)) {
                     this.FilterActions();
                     anyChanged = true;
                 }
@@ -361,7 +361,7 @@ internal class PluginUi : IDisposable {
 
                 ImGuiListClipperPtr clipper;
                 unsafe {
-                    clipper = ImGuiNative.ImGuiListClipper_ImGuiListClipper();
+                    clipper = new ImGuiListClipperPtr(ImGuiNative.ImGuiListClipper());
                 }
 
                 clipper.Begin(this.FilteredActions.Count);
@@ -470,7 +470,7 @@ internal class PluginUi : IDisposable {
 
                 ImGuiListClipperPtr clipper;
                 unsafe {
-                    clipper = ImGuiNative.ImGuiListClipper_ImGuiListClipper();
+                    clipper = new ImGuiListClipperPtr(ImGuiNative.ImGuiListClipper());
                 }
 
                 clipper.Begin(this.FilteredStatuses.Count);
@@ -624,7 +624,7 @@ internal class PluginUi : IDisposable {
             size = new Vector2(icon.Width, icon.Height);
         }
 
-        ImGui.Image(icon.ImGuiHandle, size);
+        ImGui.Image(icon.Handle, size);
     }
 
     private void DrawRatioIcon(uint id) {
@@ -635,7 +635,7 @@ internal class PluginUi : IDisposable {
 
         var ratio = ImGui.GetTextLineHeightWithSpacing() / icon.Height;
         var size = new Vector2(icon.Width * ratio, icon.Height * ratio);
-        ImGui.Image(icon.ImGuiHandle, size);
+        ImGui.Image(icon.Handle, size);
     }
 
     private static string GetActionName(Lumina.Excel.Sheets.Action action) {
